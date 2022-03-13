@@ -95,7 +95,7 @@ EventEmitter.prototype._maxListeners = undefined;
 // By default EventEmitters will print a warning if more than 10 listeners are
 // added to it. This is a useful default which helps finding memory leaks.
 export let defaultMaxListeners = 10;
-let isEventTarget;
+// let isEventTarget;
 
 function checkListener(listener) {
   validateFunction(listener, "listener");
@@ -149,16 +149,16 @@ EventEmitter.setMaxListeners = function (
   if (eventTargets.length === 0) {
     defaultMaxListeners = n;
   } else {
-    if (isEventTarget === undefined) {
+    /* if (isEventTarget === undefined) {
       isEventTarget = require("internal/event_target").isEventTarget;
-    }
+    } */
 
     for (let i = 0; i < eventTargets.length; i++) {
       const target = eventTargets[i];
-      if (isEventTarget(target)) {
+      /* if (isEventTarget(target)) {
         target[kMaxEventTargetListeners] = n;
         target[kMaxEventTargetListenersWarned] = false;
-      } else if (typeof target.setMaxListeners === "function") {
+      } else  */if (typeof target.setMaxListeners === "function") {
         target.setMaxListeners(n);
       } else {
         throw new ERR_INVALID_ARG_TYPE(
@@ -794,7 +794,7 @@ export function getEventListeners(emitterOrTarget, type) {
     return emitterOrTarget.listeners(type);
   }
   // Require event target lazily to avoid always loading it
-  const { isEventTarget, kEvents } = require("internal/event_target");
+  /* const { isEventTarget, kEvents } = require("internal/event_target");
   if (isEventTarget(emitterOrTarget)) {
     const root = emitterOrTarget[kEvents].get(type);
     const listeners = [];
@@ -807,7 +807,7 @@ export function getEventListeners(emitterOrTarget, type) {
       handler = handler.next;
     }
     return listeners;
-  }
+  } */
   throw new ERR_INVALID_ARG_TYPE(
     "emitter",
     ["EventEmitter", "EventTarget"],
