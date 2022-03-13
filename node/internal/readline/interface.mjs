@@ -43,6 +43,7 @@ import {
   kSubstringSearch,
 } from "./utils.mjs";
 import { clearScreenDown, cursorTo, moveCursor } from "./callbacks.mjs";
+import { Readable } from "../../_stream.mjs";
 
 import { StringDecoder } from "../../string_decoder.ts";
 import {
@@ -78,9 +79,6 @@ import {
   kWordRight,
   kWriteToOutput,
 } from "./symbols.mjs";
-
-// Lazy load Readable for startup performance.
-// let Readable;
 
 const kHistorySize = 30;
 const kMincrlfDelay = 100;
@@ -1184,11 +1182,8 @@ export class Interface extends InterfaceConstructor {
    * }} InterfaceAsyncIterator
    * @returns {InterfaceAsyncIterator}
    */
-  /* [Symbol.asyncIterator]() {
+   [Symbol.asyncIterator]() {
     if (this[kLineObjectStream] === undefined) {
-      if (Readable === undefined) {
-        Readable = require("stream").Readable;
-      }
       const readable = new Readable({
         objectMode: true,
         read: () => {
@@ -1220,5 +1215,5 @@ export class Interface extends InterfaceConstructor {
     }
 
     return this[kLineObjectStream][Symbol.asyncIterator]();
-  } */
+  } 
 }
