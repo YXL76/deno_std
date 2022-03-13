@@ -209,9 +209,9 @@ const imports = {
   },
 };
 
-const wasmModule = new WebAssembly.Module(
+const wasmModule = await WebAssembly.compile(
   base64.decode(
-"AGFzbQEAAAAB+4CAgAASYAAAYAF/AGABfwF/YAF/AX5gAn9/AGACf38Bf2ADf39/AGADf39/AX9gBH\
+    "AGFzbQEAAAAB+4CAgAASYAAAYAF/AGABfwF/YAF/AX5gAn9/AGACf38Bf2ADf39/AGADf39/AX9gBH\
 9/f38AYAR/f39/AX9gBX9/f39/AGAFf39/f38Bf2AGf39/f39/AGAGf39/f39/AX9gBX9/f35/AGAH\
 f39/fn9/fwF/YAJ/fgBgAn5/AX8CjIGAgAADGF9fd2JpbmRnZW5fcGxhY2Vob2xkZXJfXxVfX3diaW\
 5kZ2VuX3N0cmluZ19uZXcABRhfX3diaW5kZ2VuX3BsYWNlaG9sZGVyX18QX193YmluZGdlbl90aHJv\
@@ -2743,8 +2743,8 @@ YWxsb2NfZXJyb3JfaG9vazo6aGNjOGY2YzE0YTFjZjAyMGHQAW9jb3JlOjpwdHI6OmRyb3BfaW5fcG\
 xhY2U8JmNvcmU6Oml0ZXI6OmFkYXB0ZXJzOjpjb3BpZWQ6OkNvcGllZDxjb3JlOjpzbGljZTo6aXRl\
 cjo6SXRlcjx1OD4+Pjo6aDNlOWI3MWEwNzlkMTZlMDMA74CAgAAJcHJvZHVjZXJzAghsYW5ndWFnZQ\
 EEUnVzdAAMcHJvY2Vzc2VkLWJ5AwVydXN0Yx0xLjU1LjAgKGM4ZGZjZmUwNCAyMDIxLTA5LTA2KQZ3\
-YWxydXMGMC4xOS4wDHdhc20tYmluZGdlbgYwLjIuNzQ=",
-  ),
+YWxydXMGMC4xOS4wDHdhc20tYmluZGdlbgYwLjIuNzQ="
+  )
 );
 const wasmInstance = new WebAssembly.Instance(wasmModule, imports);
 const wasm = wasmInstance.exports;

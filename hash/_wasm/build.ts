@@ -66,7 +66,7 @@ const inlinedScript = `\
   generatedScript.replace(
     /^const file =.*?;\nconst wasmFile =.*?;\nconst wasmModule =.*?;\n/sm,
     `
-      const wasmModule = new WebAssembly.Module(base64.decode("${
+      const wasmModule = await WebAssembly.compile(base64.decode("${
       base64.encode(generatedWasm).replace(/.{78}/g, "$&\\\n")
     }"));`,
   )

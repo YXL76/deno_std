@@ -389,7 +389,7 @@ const imports = {
   },
 };
 
-const wasmModule = new WebAssembly.Module(wasmBytes);
+const wasmModule = await WebAssembly.compile(wasmBytes);
 const wasmInstance = new WebAssembly.Instance(wasmModule, imports);
 const wasm = wasmInstance.exports;
 
