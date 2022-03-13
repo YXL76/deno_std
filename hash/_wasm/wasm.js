@@ -2746,7 +2746,7 @@ EEUnVzdAAMcHJvY2Vzc2VkLWJ5AwVydXN0Yx0xLjU1LjAgKGM4ZGZjZmUwNCAyMDIxLTA5LTA2KQZ3\
 YWxydXMGMC4xOS4wDHdhc20tYmluZGdlbgYwLjIuNzQ="
   )
 );
-const wasmInstance = new WebAssembly.Instance(wasmModule, imports);
+const wasmInstance = await WebAssembly.instantiate(wasmModule, imports);
 const wasm = wasmInstance.exports;
 
 // only exposed for testing
