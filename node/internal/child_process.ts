@@ -131,7 +131,10 @@ export class ChildProcess extends EventEmitter {
         stdout: toDenoStdio(stdout as NodeStdio | number),
         stderr: toDenoStdio(stderr as NodeStdio | number),
       });
-      this.pid = this.#process.pid;
+      Object.defineProperty(this, "pid", {
+        enumerable: true,
+        get: () => this.#process.pid,
+      });
 
       if (stdin === "pipe") {
         assert(this.#process.stdin);
