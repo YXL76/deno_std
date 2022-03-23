@@ -4,7 +4,7 @@
 export type OSType = "windows" | "linux" | "darwin";
 
 export const osType: OSType = (() => {
-  // deno-lint-ignore no-explicit-any
+  /* // deno-lint-ignore no-explicit-any
   const { Deno } = globalThis as any;
   if (typeof Deno?.build?.os === "string") {
     return Deno.build.os;
@@ -14,9 +14,9 @@ export const osType: OSType = (() => {
   const { navigator } = globalThis as any;
   if (navigator?.appVersion?.includes?.("Win") ?? false) {
     return "windows";
-  }
+  } */
 
-  return "linux";
+  return "linux" as const;
 })();
 
-export const isWindows = osType === "windows";
+export const isWindows = false;
